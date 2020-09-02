@@ -1,0 +1,24 @@
+import React, {useState} from 'react';
+import Header from "./components/Header/Header";
+import AppDrawer from "./components/Drawer/Drawer";
+import {Route} from "react-router-dom";
+import Contacts from "./components/Contacts/Contacts";
+import Main from "./components/Main/Main";
+import Products from "./components/Products/Products";
+import ProductDetails from "./components/Products/ProductDetails";
+
+
+const App = (props)=>{
+    const [isDrawerOpen, setDrawerOpen] = useState(false);
+    return(
+        <div>
+            <Header setDrawerOpen={setDrawerOpen} />
+            <AppDrawer open={isDrawerOpen} setDrawerOpen={setDrawerOpen} />
+            <Route exact path='/' component={Main} />
+            <Route path='/contacts' component={Contacts} />
+            <Route path='/products' component={Products} />
+            <Route path='/productDetails/:id' component={ProductDetails} />
+        </div>
+    )};
+
+export default App;
