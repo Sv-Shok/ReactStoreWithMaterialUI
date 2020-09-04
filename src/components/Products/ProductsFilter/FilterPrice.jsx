@@ -16,7 +16,7 @@ function valuetext(value) {
 export default function FilterPrice({filterProductsPrice}) {
     const classes = useStyles();
     const [value, setValue] = React.useState([1000, 15000]);
-
+    const [maxPrice, MinPrice] = value;
     const handleChange = (event, newValue) => {
         setValue(newValue);
         filterProductsPrice(newValue);
@@ -24,9 +24,6 @@ export default function FilterPrice({filterProductsPrice}) {
 
     return (
         <div className={classes.root}>
-            <Typography id="range-slider" gutterBottom>
-                Price range
-            </Typography>
             <Slider
                 value={value}
                 onChange={handleChange}
@@ -35,6 +32,9 @@ export default function FilterPrice({filterProductsPrice}) {
                 getAriaValueText={valuetext}
                 max={100000}
             />
+            <Typography id="range-slider" gutterBottom>
+                Ціна: <span> від {maxPrice} грн. до {MinPrice} грн.</span>
+            </Typography>
         </div>
     );
 }

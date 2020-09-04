@@ -7,16 +7,24 @@ import {storeProducts} from "./../../data";
 import FilterOptions from "./ProductsFilter/FilterOptions";
 import FilterPrice from "./ProductsFilter/FilterPrice";
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme)=>({
     itemAlign:{
         alignItems: 'center'
     },
     containerFilter:{
         display: "flex",
         justifyContent: 'space-around',
-        paddingTop: '1rem'
+        paddingTop: '2.5rem',
+        borderBottom: `1px solid ${theme.palette.primary.main}`,
+        marginBottom: '2rem'
     },
-});
+    '@media screen and (max-width:768px)': {
+        containerFilter:{
+            flexDirection:' column',
+        }
+    }
+}));
 
 const Products = ()=> {
     const [stateProducts, setProducts] = useState({
@@ -42,7 +50,6 @@ const Products = ()=> {
 
     const filterProductsPrice = (price)=>{
         let [priceMin, priceMax] = price;
-        console.log(price);
         setProducts( {
             products: storeProducts.slice().filter((productItem)=>{
                 return productItem.price > priceMin && productItem.price < priceMax
@@ -56,10 +63,9 @@ const Products = ()=> {
   return (
       <Container  maxWidth="lg" >
           <div className={classes.containerFilter}>
-            <FilterOptions sortProducts={sortProducts} />
-            <FilterPrice filterProductsPrice={filterProductsPrice}/>
+              <FilterPrice filterProductsPrice={filterProductsPrice}/>
+              <FilterOptions sortProducts={sortProducts} />
           </div>
-          <h1>This is our content products</h1>
           <Grid container spacing={4}>
               {stateProducts.products.map((card)=>{
                   return (
