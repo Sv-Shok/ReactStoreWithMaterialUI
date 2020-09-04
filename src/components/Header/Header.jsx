@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import grey from '@material-ui/core/colors/grey';
 import Container from '@material-ui/core/Container';
 import Badge from '@material-ui/core/Badge';
-
+import Cart from "../Cart/Cart";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = ({setDrawerOpen}) => {
+const Header = ({setDrawerOpen, cartItems}) => {
     const classes = useStyles();
     return (
         <AppBar position="sticky" >
@@ -52,11 +52,14 @@ const Header = ({setDrawerOpen}) => {
                 <Typography variant="h6" className={classes.title}>
                     <Link to={"/"}><img src={Logo} alt="volt" className={classes.logo} /></Link>
                 </Typography>
-                <Button color="inherit">
-                    <Badge color="secondary"  badgeContent={99}>
-                        <CartIcon style={{ fontSize: "2.5rem" }}/>
-                    </Badge>
-                </Button>
+                <Cart cartItems={cartItems}/>
+                {/*<Link to="cart">*/}
+                {/*<Button style={{color: "white"}}>*/}
+                {/*    <Badge color="secondary"  badgeContent={cartItems}>*/}
+                {/*        <CartIcon style={{ fontSize: "2.5rem" }}/>*/}
+                {/*    </Badge>*/}
+                {/*</Button>*/}
+                {/*</Link>*/}
                 <Button color="inherit">Login</Button>
             </Toolbar>
             </Container>

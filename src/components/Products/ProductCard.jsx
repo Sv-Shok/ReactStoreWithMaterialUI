@@ -22,9 +22,8 @@ const useStyles = makeStyles((theme)=>({
     }
 }));
 
-const ProductCard = (props)=> {
-
-     const {id, title, img, price, info, inCart, count, total} = props;
+const ProductCard = ({card, addToCart})=> {
+     const {id, title, img, price, info, inCart, count, total} = card;
 
     const classes = useStyles();
     return (
@@ -55,7 +54,7 @@ const ProductCard = (props)=> {
                         Learn More
                     </Button>
                 </Link>
-                <Button size="small" color="primary" >
+                <Button size="small" color="secondary" onClick={()=>addToCart(card)}>
                     <AddShoppingCartIcon style={{ fontSize: "2.5rem" }} />
                 </Button>
             </CardActions>

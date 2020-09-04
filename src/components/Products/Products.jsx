@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme)=>({
     }
 }));
 
-const Products = ()=> {
+const Products = ( {addToCart} )=> {
+
     const [stateProducts, setProducts] = useState({
         products: storeProducts,
         sort:"",
@@ -70,7 +71,7 @@ const Products = ()=> {
               {stateProducts.products.map((card)=>{
                   return (
                       <Grid item key={card.id} xs={12} sm={6} md={4}>
-                              <ProductCard {...card} />
+                              <ProductCard card={card} addToCart={addToCart} />
                       </Grid>
                   )
               })}
