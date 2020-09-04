@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {Link} from "react-router-dom";
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -54,6 +55,9 @@ const ProductCard = (props)=> {
                         Learn More
                     </Button>
                 </Link>
+                <Button size="small" color="primary" >
+                    <AddShoppingCartIcon style={{ fontSize: "2.5rem" }} />
+                </Button>
             </CardActions>
         </Card>
     );
