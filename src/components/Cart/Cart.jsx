@@ -121,10 +121,12 @@ import Slide from '@material-ui/core/Slide';
 import CartIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Badge from '@material-ui/core/Badge';
 import CartItem from "./CartItem";
+import Grid from '@material-ui/core/Grid';
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        position: 'relative',
+        position: 'sticky',
     },
     title: {
         marginLeft: theme.spacing(2),
@@ -139,7 +141,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Cart({cartItems, addToCart}) {
+export default function Cart({cartItems, addToCart, removeFromCart, totalSum, decCartCount, InputChangeCartCount}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -172,19 +174,24 @@ export default function Cart({cartItems, addToCart}) {
                         </Button>
                     </Toolbar>
                 </AppBar>
-                <List>
-                    <ListItem className={classes.container}>
-                    <div>photo</div>
-                    <div>name</div>
-                    <div>count</div>
-                    <div>price</div>
-                    </ListItem>
-                    {cartItems.length === 0
-                        ? <div>Cart is empty</div>
-                        : cartItems.map((item)=> <CartItem cartData={item} addToCart={addToCart}/>)
-                    }
-
-                </List>
+                 <Container  maxWidth="lg" >
+                     {cartItems.length === 0
+                     ? <div>Корзина пуста</div>
+                     : <Grid container spacing={2}>
+                        <Grid item container alignItems="center" spacing={2}>
+                            <Grid item md={3}>photo</Grid>
+                            <Grid item md={3}>name</Grid>
+                            <Grid item md={3}>count</Grid>
+                            <Grid item md={3}>price</Grid>
+                        </Grid>
+                             {cartItems.map((item)=> <CartItem
+                                 cartData={item} addToCart={addToCart}
+                                 removeFromCart={removeFromCart} decCartCount={decCartCount}
+                                 InputChangeCartCount={InputChangeCartCount} key={item.id}/>)}
+                             <Grid item xs={12} container justify="center">Загальна сума {totalSum} грн.</Grid>
+                        </Grid>
+                     }
+                </Container>
             </Dialog>
         </div>
     );

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = ({setDrawerOpen, cartItems}) => {
+const Header = ({setDrawerOpen, cartItems, addToCart, removeFromCart, totalSum, decCartCount, InputChangeCartCount}) => {
     const classes = useStyles();
     return (
         <AppBar position="sticky" >
@@ -52,7 +52,10 @@ const Header = ({setDrawerOpen, cartItems}) => {
                 <Typography variant="h6" className={classes.title}>
                     <Link to={"/"}><img src={Logo} alt="volt" className={classes.logo} /></Link>
                 </Typography>
-                <Cart cartItems={cartItems}/>
+                <Cart cartItems={cartItems} removeFromCart={removeFromCart}
+                      totalSum={totalSum} decCartCount={decCartCount}
+                      addToCart={addToCart} InputChangeCartCount={InputChangeCartCount}
+                />
                 {/*<Link to="cart">*/}
                 {/*<Button style={{color: "white"}}>*/}
                 {/*    <Badge color="secondary"  badgeContent={cartItems}>*/}
