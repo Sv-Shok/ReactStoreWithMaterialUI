@@ -47,18 +47,6 @@ const App = (props)=>{
             });
     };
 
-    const InputChangeCartCount = ({cartData: product, value})=>{
-        cartItems.forEach((item)=> {
-            if (item.id === product.id) {
-                item.count = +value;
-                console.log(item.count);
-                setCartItems([
-                    ...cartItems,
-                ]);
-            }
-        });
-    };
-
     const removeFromCart = (product)=>{
         setCartItems(cartItems.filter(x=>x.id!==product.id));
     };
@@ -72,18 +60,11 @@ const App = (props)=>{
 
     };
 
-    // const [totalCount,setTotalCount] = useState(0);
-    // const cartCounted = (counts)=>{
-    //     let sumOfTotalCount = 0;
-    //     counts.forEach((item) => {sumOfTotalCount += item.count});
-    //     setTotalCount(sumOfTotalCount);
-    // };
 ///////////////////////////////////////////////////
     return(
         <div>
             <Header setDrawerOpen={setDrawerOpen} cartItems={cartItems} addToCart={addToCart}
                     removeFromCart={removeFromCart} totalSum={totalSum} decCartCount={decCartCount}
-                    InputChangeCartCount={InputChangeCartCount}
             />
             <AppDrawer open={isDrawerOpen} setDrawerOpen={setDrawerOpen} />
             <Route exact path='/' component={Main} />

@@ -141,7 +141,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Cart({cartItems, addToCart, removeFromCart, totalSum, decCartCount, InputChangeCartCount}) {
+export default function Cart({cartItems, addToCart, removeFromCart, totalSum, decCartCount}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -187,7 +187,7 @@ export default function Cart({cartItems, addToCart, removeFromCart, totalSum, de
                              {cartItems.map((item)=> <CartItem
                                  cartData={item} addToCart={addToCart}
                                  removeFromCart={removeFromCart} decCartCount={decCartCount}
-                                 InputChangeCartCount={InputChangeCartCount} key={item.id}/>)}
+                                 key={item.id}/>)}
                              <Grid item xs={12} container justify="center">Загальна сума {totalSum} грн.</Grid>
                         </Grid>
                      }

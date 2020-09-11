@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = ({setDrawerOpen, cartItems, addToCart, removeFromCart, totalSum, decCartCount, InputChangeCartCount}) => {
+const Header = ({setDrawerOpen, cartItems, addToCart, removeFromCart, totalSum, decCartCount }) => {
     const classes = useStyles();
     return (
         <AppBar position="sticky" >
@@ -54,7 +54,7 @@ const Header = ({setDrawerOpen, cartItems, addToCart, removeFromCart, totalSum, 
                 </Typography>
                 <Cart cartItems={cartItems} removeFromCart={removeFromCart}
                       totalSum={totalSum} decCartCount={decCartCount}
-                      addToCart={addToCart} InputChangeCartCount={InputChangeCartCount}
+                      addToCart={addToCart}
                 />
                 {/*<Link to="cart">*/}
                 {/*<Button style={{color: "white"}}>*/}

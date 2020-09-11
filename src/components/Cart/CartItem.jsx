@@ -19,14 +19,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const CartItem = ({cartData, addToCart, removeFromCart, decCartCount, InputChangeCartCount}) =>{
+const CartItem = ({cartData, addToCart, removeFromCart, decCartCount}) =>{
     const {id, title, img, price, info, inCart, count, total} = cartData;
     const classes = useStyles();
-
-    const handleInputOnChange = event => {
-        const { value } = event.target;
-        InputChangeCartCount({cartData, value});
-    };
     return (
         <>
         <Grid item container
@@ -38,7 +33,7 @@ const CartItem = ({cartData, addToCart, removeFromCart, decCartCount, InputChang
             <Grid item xs={6} md={3}>{title}</Grid>
             <Grid item xs={6} md={3}>
                 <div><button onClick={()=> decCartCount(cartData)}>-</button>
-                    <Input value={count} className={classes.inputCount} onChange={handleInputOnChange} type='number'/>
+                    <span>{ count }</span>
                     <button onClick={()=> addToCart(cartData)}>+</button>
                 </div></Grid>
             <Grid item xs={6} md={3}>{price} грн.
