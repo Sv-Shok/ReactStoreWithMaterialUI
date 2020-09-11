@@ -15,7 +15,11 @@ const App = (props)=>{
     ///////////////////////////////////////////////////
     //cart events
 
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(
+        localStorage.getItem("cartItems")
+            ? JSON.parse(localStorage.getItem("cartItems"))
+            : []
+    );
     const addToCart = (product)=>{
         let alreadyInCart = false;
         cartItems.forEach((item)=>{
@@ -52,6 +56,7 @@ const App = (props)=>{
     };
     useEffect(() => {
         countTotalSum(cartItems);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }, [cartItems]);
 
     const [totalSum, setTotalSum] = useState(0);
