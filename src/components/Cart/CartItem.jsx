@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CartItem = ({cartData, addToCart, removeFromCart, decCartCount}) =>{
     const {id, title, img, price, info, inCart, count, total} = cartData;
+    console.log(inCart);
     const classes = useStyles();
     return (
         <>

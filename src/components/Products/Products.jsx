@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from '@material-ui/core/Container';
 import ProductCard from "./ProductCard";
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from "@material-ui/core/styles";
-import {storeProducts} from "./../../data";
 import FilterOptions from "./ProductsFilter/FilterOptions";
 import FilterPrice from "./ProductsFilter/FilterPrice";
 
@@ -26,39 +25,8 @@ const useStyles = makeStyles((theme)=>({
     }
 }));
 
-const Products = ( {addToCart} )=> {
-
-    const [stateProducts, setProducts] = useState({
-        products: storeProducts,
-        sort:"",
-        filterPrice:""
-    });
-
-    const sortProducts = (sort)=>{
-        setProducts({
-            products: stateProducts.products
-                .slice()
-                .sort((a,b)=> {
-                 return    sort === "Newest" ?
-                            ((a.id < b.id) ? 1 : -1) :
-                           sort === "Oldest" ?
-                            ((a.id > b.id) ? 1 : -1) :
-                               ((a.id > b.id) ? 1 : -1)
-                }),
-            sort: sort,
-        });
-    };
-
-    const filterProductsPrice = (price)=>{
-        let [priceMin, priceMax] = price;
-        setProducts( {
-            products: storeProducts.slice().filter((productItem)=>{
-                return productItem.price > priceMin && productItem.price < priceMax
-            }),
-            sort:"",
-            filterPrice:""
-        })
-    };
+const Products = (props)=> {
+    const {addToCart, filterProductsPrice, sortProducts, stateProducts} = props;
 
     const classes = useStyles();
   return (

@@ -6,11 +6,53 @@ import Contacts from "./components/Contacts/Contacts";
 import Main from "./components/Main/Main";
 import Products from "./components/Products/Products";
 import ProductDetails from "./components/Products/ProductDetails";
-import Cart from "./components/Cart/Cart";
+import {storeProducts} from "./data";
 
 
 const App = (props)=>{
     const [isDrawerOpen, setDrawerOpen] = useState(false);
+    ///////////////////////////////////////////////////
+
+    //products events
+    const [stateProducts, setProducts] = useState({
+        products: localStorage.getItem("stateProducts")
+            ? JSON.parse(localStorage.getItem("stateProducts"))
+            : storeProducts.slice(),
+        sort:"",
+        filterPrice:""
+    });
+
+    useEffect(() => {
+        // localStorage.setItem("cartItems", JSON.stringify(stateProducts));
+        console.log('render')
+    }, [stateProducts]);
+
+    const sortProducts = (sort)=>{
+        setProducts({
+            products: stateProducts.products
+                .slice()
+                .sort((a,b)=> {
+                    return    sort === "Newest" ?
+                        ((a.id < b.id) ? 1 : -1) :
+                        sort === "Oldest" ?
+                            ((a.id > b.id) ? 1 : -1) :
+                            ((a.id > b.id) ? 1 : -1)
+                }),
+            sort: sort,
+        });
+    };
+
+    const filterProductsPrice = (price)=>{
+        let [priceMin, priceMax] = price;
+        setProducts( {
+            products: storeProducts.slice().filter((productItem)=>{
+                return productItem.price > priceMin && productItem.price < priceMax
+            }),
+            sort:"",
+            filterPrice:""
+        })
+    };
+
 
     ///////////////////////////////////////////////////
     //cart events
@@ -33,6 +75,7 @@ const App = (props)=>{
         });
         if(!alreadyInCart){
             product.count = 1;
+            product.inCart = true;
             setCartItems([
                 ...cartItems,
                 product
@@ -53,7 +96,10 @@ const App = (props)=>{
 
     const removeFromCart = (product)=>{
         setCartItems(cartItems.filter(x=>x.id!==product.id));
+        product.inCart = false;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
     };
+
     useEffect(() => {
         countTotalSum(cartItems);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -75,7 +121,8 @@ const App = (props)=>{
             <Route exact path='/' component={Main} />
             <Route path='/contacts' component={Contacts} />
             {/*<Route path='/products' component={Products}/>*/}
-            <Route path='/products' render={() => <Products  addToCart={addToCart} />} />
+            <Route path='/products' render={() => <Products addToCart={addToCart} sortProducts={sortProducts} filterProductsPrice={filterProductsPrice} stateProducts={stateProducts}/>}
+            />
             <Route path='/productDetails/:id' component={ProductDetails} />
         </div>
     )};

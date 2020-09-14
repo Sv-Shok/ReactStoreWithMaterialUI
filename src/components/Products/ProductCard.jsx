@@ -54,7 +54,7 @@ const ProductCard = ({card, addToCart})=> {
                         Learn More
                     </Button>
                 </Link>
-                <Button size="small" color="secondary" onClick={()=>addToCart(card)}>
+                <Button size="small" color="secondary" onClick={()=>addToCart(card)} disabled={inCart}>
                     <AddShoppingCartIcon style={{ fontSize: "2.5rem" }} />
                 </Button>
             </CardActions>
