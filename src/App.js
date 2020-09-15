@@ -7,6 +7,8 @@ import Main from "./components/Main/Main";
 import Products from "./components/Products/Products";
 import ProductDetails from "./components/Products/ProductDetails";
 import {storeProducts} from "./data";
+import store from "./store";
+import {Provider} from "react-redux";
 
 
 const App = (props)=>{
@@ -113,6 +115,7 @@ const App = (props)=>{
 
 ///////////////////////////////////////////////////
     return(
+        <Provider store={store}>
         <div>
             <Header setDrawerOpen={setDrawerOpen} cartItems={cartItems} addToCart={addToCart}
                     removeFromCart={removeFromCart} totalSum={totalSum} decCartCount={decCartCount}
@@ -125,6 +128,7 @@ const App = (props)=>{
             />
             <Route path='/productDetails/:id' component={ProductDetails} />
         </div>
+        </Provider>
     )};
 
 export default App;
