@@ -24,10 +24,6 @@ const App = (props)=>{
         filterPrice:""
     });
 
-    useEffect(() => {
-        // localStorage.setItem("cartItems", JSON.stringify(stateProducts));
-        console.log('render')
-    }, [stateProducts]);
 
     const sortProducts = (sort)=>{
         setProducts({

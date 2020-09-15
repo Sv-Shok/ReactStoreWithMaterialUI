@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme)=>({
 
 const Products = (props)=> {
     const {addToCart, filterProductsPrice, sortProducts, stateProducts} = props;
-    const products = useSelector(state=> state.products.items);
+    let products = useSelector(state=> state.products.items);
+    let productsFilter = useSelector(state=> state.products.filteredItems);
+    if(productsFilter){ products = productsFilter}
     const dispatch = useDispatch();
     const classes = useStyles();
     useEffect(()=>{
@@ -44,14 +46,7 @@ const Products = (props)=> {
           {!products
               ? <div>Loading...</div>
               :   <Grid container spacing={4}>
-                  {/*{stateProducts.products.map((card)=>{*/}
-                  {/*    return (*/}
-                  {/*        <Grid item key={card.id} xs={12} sm={6} md={4}>*/}
-                  {/*            <ProductCard card={card} addToCart={addToCart} />*/}
-                  {/*        </Grid>*/}
-                  {/*    )*/}
-                  {/*})}*/}
-                  {products.map((card, index)=>{
+                  { products.map((card, index)=>{
                       return (
                           <Grid item key={card.id} xs={12} sm={6} md={4}>
                               <ProductCard card={card} addToCart={addToCart} />
