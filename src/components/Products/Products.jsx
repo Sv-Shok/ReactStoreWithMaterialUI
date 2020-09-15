@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import {makeStyles} from "@material-ui/core/styles";
 import FilterOptions from "./ProductsFilter/FilterOptions";
 import FilterPrice from "./ProductsFilter/FilterPrice";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchProducts} from "../../actions/productActions";
 
 
 const useStyles = makeStyles((theme)=>({
@@ -27,23 +29,38 @@ const useStyles = makeStyles((theme)=>({
 
 const Products = (props)=> {
     const {addToCart, filterProductsPrice, sortProducts, stateProducts} = props;
-
+    const products = useSelector(state=> state.products.items);
+    const dispatch = useDispatch();
     const classes = useStyles();
+    useEffect(()=>{
+    dispatch(fetchProducts());
+    },[]);
   return (
       <Container  maxWidth="lg" >
           <div className={classes.containerFilter}>
               <FilterPrice filterProductsPrice={filterProductsPrice}/>
               <FilterOptions sortProducts={sortProducts} />
           </div>
-          <Grid container spacing={4}>
-              {stateProducts.products.map((card)=>{
-                  return (
-                      <Grid item key={card.id} xs={12} sm={6} md={4}>
+          {!products
+              ? <div>Loading...</div>
+              :   <Grid container spacing={4}>
+                  {/*{stateProducts.products.map((card)=>{*/}
+                  {/*    return (*/}
+                  {/*        <Grid item key={card.id} xs={12} sm={6} md={4}>*/}
+                  {/*            <ProductCard card={card} addToCart={addToCart} />*/}
+                  {/*        </Grid>*/}
+                  {/*    )*/}
+                  {/*})}*/}
+                  {products.map((card, index)=>{
+                      return (
+                          <Grid item key={card.id} xs={12} sm={6} md={4}>
                               <ProductCard card={card} addToCart={addToCart} />
-                      </Grid>
-                  )
-              })}
-          </Grid>
+                          </Grid>
+                      )
+                  })}
+              </Grid>
+          }
+
       </Container>
 
   );
