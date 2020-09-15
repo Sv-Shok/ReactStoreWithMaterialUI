@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import {useDispatch, useSelector} from "react-redux";
+import {filterProductsByPrice} from "../../../actions/productActions";
 
 const useStyles = makeStyles({
     root: {
@@ -14,12 +16,18 @@ function valuetext(value) {
 }
 
 export default function FilterPrice({filterProductsPrice}) {
+
+    const products = useSelector(state=> state.products.items);
+    const dispatch = useDispatch();
+
+
     const classes = useStyles();
     const [value, setValue] = React.useState([1000, 15000]);
     const [maxPrice, MinPrice] = value;
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        filterProductsPrice(newValue);
+        // filterProductsPrice(newValue);
+        dispatch(filterProductsByPrice(products, newValue));
     };
 
     return (
