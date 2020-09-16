@@ -30,8 +30,26 @@ export const filterProductsByPrice = (filteredProducts, price)=> (dispatch)=>{
     })
 };
 
+export const sortProducts = (products, sort)=>(dispatch)=>{
+    let sortedProducts = products.slice().sort((a,b)=> {
+                return    sort === "Newest" ?
+                    ((a.id < b.id) ? 1 : -1) :
+                    sort === "Oldest" ?
+                        ((a.id > b.id) ? 1 : -1) :
+                        ((a.id > b.id) ? 1 : -1)
+            });
+    console.log(sortedProducts);
+    dispatch({
+        type: SORT_PRODUCTS,
+        payload: {
+            items: sortedProducts
+        }
+    })
+};
+
 // let [priceMin, priceMax] = price;
 // setProducts( {
 //     products: storeProducts.slice().filter((productItem)=>{
 //         return productItem.price > priceMin && productItem.price < priceMax
 //     }),
+

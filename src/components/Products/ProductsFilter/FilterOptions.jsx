@@ -5,6 +5,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import {sortProducts} from "../../../actions/productActions";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -17,7 +19,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function FilterOptions({sortProducts}) {
+export default function FilterOptions() {
+
+    let products = useSelector(state=> state.products.items);
+    let productsForFilter = useSelector(state=> state.products.filteredItems);
+    if(productsForFilter){ products = productsForFilter}
+    const dispatch = useDispatch();
 
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -25,7 +32,8 @@ export default function FilterOptions({sortProducts}) {
     });
     const handleChange = (event) => {
         const name = event.target.name;
-        sortProducts( event.target.value);
+        dispatch(sortProducts(products, event.target.value));
+        // sortProducts( event.target.value);
         setState({
             ...state,
             [name]: event.target.value,
