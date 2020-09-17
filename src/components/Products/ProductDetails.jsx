@@ -4,9 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {makeStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import image from './../../img/bike.jpg';
 import Button from "@material-ui/core/Button";
-import {storeProducts} from '../../data';
 import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme)=>({
@@ -41,9 +39,8 @@ const useStyles = makeStyles((theme)=>({
 const ProductDetails = (props)=> {
     const productId = props.match.params.id;
     const products = useSelector(state => state.products.items);
-    const product = products.find(element=> element.id === productId);
+    const product = products.find(element=> element.id === +productId);
     const {title, img, price, info, inCart,} = product;
-    debugger
     const classes = useStyles();
     return (
         <Container  maxWidth="lg" >
