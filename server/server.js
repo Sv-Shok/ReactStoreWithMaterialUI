@@ -16,7 +16,7 @@ mongoose.connect("mongodb://localhost/store-db",{
 const Product = mongoose.model(
     "products",
     new mongoose.Schema({
-    id: {type: String, default: shortid.generate},
+        id: Number,
         title: String,
         img: String,
         price: Number,
