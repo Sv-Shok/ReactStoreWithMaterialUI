@@ -1,5 +1,10 @@
-import {FETCH_PRODUCTS, FILTER_PRODUCTS_BY_PRICE, SORT_PRODUCTS} from "../type";
-import {storeProducts} from "../data";
+import {
+    FETCH_PRODUCTS,
+    FILTER_PRODUCTS_BY_PRICE, PRODUCT_DETAILS_FAIL,
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCCESS,
+    SORT_PRODUCTS
+} from "../type";
 
 export const fetchProducts = ()=> async (dispatch)=>{
  const res = await  fetch("/api/products");
@@ -10,14 +15,16 @@ export const fetchProducts = ()=> async (dispatch)=>{
  })
 };
 
-// export const sortProducts = (products, size)=> (dispatch)=>{
-//     dispatch({
-//         type: SORT_PRODUCTS,
-//         payload: {
-//
-//         }
-//     })
-// };
+export const fetchDetailsProduct = (productId)=> async (dispatch)=>{
+    try{
+        dispatch({type: PRODUCT_DETAILS_REQUEST, payload: productId});
+        const res = await fetch(`/api/productDetails/${productId}`);
+        const data = await res.json();
+        dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: data});
+    }catch (error) {
+        dispatch({type: PRODUCT_DETAILS_FAIL, payload: error.message});
+    }
+};
 
 export const filterProductsByPrice = (filteredProducts, price)=> (dispatch)=>{
     let [priceMin, priceMax] = price;

@@ -28,6 +28,15 @@ app.get("/api/products", async (req, res)=>{
     res.send(products);
 });
 
+app.get("/api/productDetails/:id", async (req, res)=>{
+    const product = await Product.findOne({id: req.params.id});
+    if(product){
+        res.send(product);
+    }else {
+        res.status(404).send({message: "Product not found"})
+    }
+});
+
 app.post("/api/products", async (req, res)=>{
     const newProduct = new Product(req.body);
     const savedProduct = await newProduct.save();
