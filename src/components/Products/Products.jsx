@@ -8,7 +8,6 @@ import FilterPrice from "./ProductsFilter/FilterPrice";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchProducts} from "../../actions/productActions";
 
-
 const useStyles = makeStyles((theme)=>({
     itemAlign:{
         alignItems: 'center'

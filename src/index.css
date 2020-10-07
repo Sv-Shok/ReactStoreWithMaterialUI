@@ -18,33 +18,3 @@ a{
   /*font-size: 1.6rem;*/
   font-family: Helvetica, Arial, sans-serif;
 }
-
-/*.grid-container{*/
-/*  display: grid;*/
-/*  grid-template-areas: "header" "main" "footer";*/
-/*  grid-template-rows: 5rem 1fr 5rem;*/
-/*  grid-template-columns: 1fr;*/
-/*  height: 100%;*/
-/*}*/
-
-/*.header{*/
-/*  grid-area: header;*/
-/*  !*background-color: #139eff;*!*/
-/*}*/
-/*.header a{*/
-/*  color: white;*/
-/*}*/
-
-/*.main{*/
-/*  grid-area: main;*/
-/*  !*background-color: #e4a7ff;*!*/
-/*}*/
-
-/*.footer{*/
-/*  grid-area: footer;*/
-/*  !*background-color: #2f3029;*!*/
-/*  color: white;*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*}*/

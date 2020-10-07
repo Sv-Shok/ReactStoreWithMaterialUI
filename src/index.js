@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
-// import {ThemeProvider} from "@material-ui/core/styles"
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import './index.css';
 import App from './App';

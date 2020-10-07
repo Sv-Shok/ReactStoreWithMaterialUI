@@ -12,7 +12,6 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import {addToCart} from "../../actions/cartActions";
 import {useDispatch} from "react-redux";
 
-
 const useStyles = makeStyles((theme)=>({
     media: {
         height: 250,
