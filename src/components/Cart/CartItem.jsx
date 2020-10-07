@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Input from '@material-ui/core/Input';
-import { OutlinedInput } from '@material-ui/core';
 import Button from "@material-ui/core/Button";
+import {useDispatch} from "react-redux";
+import {addToCart, decCartCount, removeFromCart} from "../../actions/cartActions";
 
 const useStyles = makeStyles((theme) => ({
     container:{
@@ -19,9 +19,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const CartItem = ({cartData, addToCart, removeFromCart, decCartCount}) =>{
+const CartItem = ({cartData}) =>{
     const {id, title, img, price, info, inCart, count, total} = cartData;
-    console.log(inCart);
+    let dispatch = useDispatch();
+
     const classes = useStyles();
     return (
         <>
@@ -33,12 +34,12 @@ const CartItem = ({cartData, addToCart, removeFromCart, decCartCount}) =>{
             <Grid item xs={6} md={3}><Link to="#"><img src={img} width="189" alt={title}/></Link></Grid>
             <Grid item xs={6} md={3}>{title}</Grid>
             <Grid item xs={6} md={3}>
-                <div><button onClick={()=> decCartCount(cartData)}>-</button>
+                <div><button onClick={()=> dispatch(decCartCount(cartData))}>-</button>
                     <span>{ count }</span>
-                    <button onClick={()=> addToCart(cartData)}>+</button>
+                    <button onClick={()=> dispatch(addToCart(cartData))}>+</button>
                 </div></Grid>
             <Grid item xs={6} md={3}>{price} грн.
-                <Button variant="contained" color="primary" onClick={()=>removeFromCart(cartData)}>
+                <Button variant="contained" color="primary" onClick={()=>dispatch(removeFromCart(cartData))}>
                 Delete
             </Button>
             </Grid>

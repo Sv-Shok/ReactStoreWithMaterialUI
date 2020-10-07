@@ -1,22 +1,14 @@
 import React from 'react';
-import AcUnitRoundedIcon from '@material-ui/icons/AcUnitRounded';
 import {makeStyles} from '@material-ui/core/styles';
-// import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import { Link } from "react-router-dom";
 import Logo from "../../img/logo.jpg";
-import CartIcon from '@material-ui/icons/ShoppingCartOutlined';
-import Hidden from '@material-ui/core/Hidden';
-import classNames from 'classnames';
 import Button from "@material-ui/core/Button";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import grey from '@material-ui/core/colors/grey';
 import Container from '@material-ui/core/Container';
-import Badge from '@material-ui/core/Badge';
 import Cart from "../Cart/Cart";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Header = ({setDrawerOpen, cartItems, addToCart, removeFromCart, totalSum, decCartCount }) => {
+const Header = ({setDrawerOpen}) => {
     const classes = useStyles();
     return (
         <AppBar position="sticky" >
@@ -52,17 +44,7 @@ const Header = ({setDrawerOpen, cartItems, addToCart, removeFromCart, totalSum, 
                 <Typography variant="h6" className={classes.title}>
                     <Link to={"/"}><img src={Logo} alt="volt" className={classes.logo} /></Link>
                 </Typography>
-                <Cart cartItems={cartItems} removeFromCart={removeFromCart}
-                      totalSum={totalSum} decCartCount={decCartCount}
-                      addToCart={addToCart}
-                />
-                {/*<Link to="cart">*/}
-                {/*<Button style={{color: "white"}}>*/}
-                {/*    <Badge color="secondary"  badgeContent={cartItems}>*/}
-                {/*        <CartIcon style={{ fontSize: "2.5rem" }}/>*/}
-                {/*    </Badge>*/}
-                {/*</Button>*/}
-                {/*</Link>*/}
+                <Cart/>
                 <Button color="inherit">Login</Button>
             </Toolbar>
             </Container>

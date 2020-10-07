@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -15,7 +15,7 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
-export default function FilterPrice({filterProductsPrice}) {
+export default function FilterPrice() {
 
     const products = useSelector(state=> state.products.items);
     const dispatch = useDispatch();
@@ -26,7 +26,6 @@ export default function FilterPrice({filterProductsPrice}) {
     const [maxPrice, MinPrice] = value;
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        // filterProductsPrice(newValue);
         dispatch(filterProductsByPrice(products, newValue));
     };
 

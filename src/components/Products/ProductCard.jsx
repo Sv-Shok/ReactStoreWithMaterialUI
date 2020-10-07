@@ -9,6 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {Link} from "react-router-dom";
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import {addToCart} from "../../actions/cartActions";
+import {useDispatch} from "react-redux";
 
 
 const useStyles = makeStyles((theme)=>({
@@ -22,9 +24,9 @@ const useStyles = makeStyles((theme)=>({
     }
 }));
 
-const ProductCard = ({card, addToCart})=> {
+const ProductCard = ({card})=> {
      const {id, title, img, price, info, inCart, count, total} = card;
-
+    let dispatchAddToCart = useDispatch();
     const classes = useStyles();
     return (
         <Card >
@@ -54,7 +56,7 @@ const ProductCard = ({card, addToCart})=> {
                         Learn More
                     </Button>
                 </Link>
-                <Button size="small" color="secondary" onClick={()=>addToCart(card)} disabled={inCart}>
+                <Button size="small" color="secondary" onClick={()=>dispatchAddToCart(addToCart(card))} disabled={inCart}>
                     <AddShoppingCartIcon style={{ fontSize: "2.5rem" }} />
                 </Button>
             </CardActions>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Container from '@material-ui/core/Container';
 import ProductCard from "./ProductCard";
 import Grid from '@material-ui/core/Grid';
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 const Products = (props)=> {
-    const {addToCart, filterProductsPrice, sortProducts, stateProducts} = props;
     let products = useSelector(state=> state.products.items);
     let productsFilter = useSelector(state=> state.products.filteredItems);
     if(productsFilter){ products = productsFilter}
@@ -40,8 +39,8 @@ const Products = (props)=> {
   return (
       <Container  maxWidth="lg" >
           <div className={classes.containerFilter}>
-              <FilterPrice filterProductsPrice={filterProductsPrice}/>
-              <FilterOptions sortProducts={sortProducts} />
+              <FilterPrice />
+              <FilterOptions />
           </div>
           {!products
               ? <div>Loading...</div>
@@ -49,7 +48,7 @@ const Products = (props)=> {
                   { products.map((card, index)=>{
                       return (
                           <Grid item key={card.id} xs={12} sm={6} md={4}>
-                              <ProductCard card={card} addToCart={addToCart} />
+                              <ProductCard card={card}/>
                           </Grid>
                       )
                   })}

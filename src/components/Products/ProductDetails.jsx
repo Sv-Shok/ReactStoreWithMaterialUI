@@ -4,9 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {makeStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import image from './../../img/bike.jpg';
 import Button from "@material-ui/core/Button";
-import {storeProducts} from '../../data';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchDetailsProduct} from "../../actions/productActions";
 
